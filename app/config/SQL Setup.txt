@@ -1,0 +1,61 @@
+SQL Setup
+=========
+
+Table: users
+----------------------
+Create: 
+query = "INSERT INTO `XXXXX`.`users` (`name`, `alias`, `email`, `pw_hash`, `created_at`, `updated_at`) VALUES ({}, {}, {}, {}, NOW(), NOW());".format(XXX, XXX, XXX, XXX);
+
+Read (1):
+query = "SELECT * FROM users WHERE id={};".format(XXX);
+
+Read (*):
+query = "SELECT * FROM users;";
+
+Update:
+query = "UPDATE `XXX`.`users` SET `name`={}, `alias`={}, `email`={}, `updated_at`=NOW() WHERE `id`={};".format(xxx, xxx, xxx, xxx);
+
+Delete:
+query = "DELETE FROM `XXX`.`users` WHERE `id`={};".format(xxx);
+
+
+======================
+TABLE TEMPLATE 
+(Copy Above and Edit)
+======================
+Table: < enter name >
+----------------------
+Create:
+Read (1):
+Read (*):
+Update:
+Delete:
+
+======================
+EXAMPLE QUERIES
+======================
+
+Scenario: < You have a table you need to join to the user table to get full view of the tables together>
+SQL:
+
+----------------------
+
+Scenario: < You have a table you need to join to the user table to get full view of the tables together>
+SQL:
+
+----------------------
+
+Scenario: < You have a table you need to join to the user table to get full view of the tables together>
+SQL:
+
+----------------------
+
+Scenario: < You have a table you need to join to the user table to get full view of the tables together>
+SQL:
+
+----------------------
+
+Scenario: < You have a table you need to join to the user table to get full view of the tables together>
+SQL:
+
+----------------------

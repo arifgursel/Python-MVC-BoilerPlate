@@ -1,0 +1,25 @@
+{% extends "./templates/_base.html" %}
+{% block title %}User: Info Page{% endblock %}
+{% block head %} 
+	{{ super() }}
+{% endblock %}
+{% block header %}
+	{{ super() }}
+{% endblock %}
+{% block content %}
+	<form method="POST" action="/users/{{ user.id }}/edit" style="display: inline;">
+		Name: <input type='text' value='{{ user.name }}' name='name'>
+		Alias: <input type='text' value='{{ user.alias }}' name='alias'> 
+		Email: <input type='text' value='{{ user.email }}' name='email'> 
+		<p>User_ID: {{ user.id }}</p>
+		<p>Created: {{ user.created_at }}</p>
+		<p>Updated: {{ user.updated_at }}</p>
+		<input type="submit" value="Update" style="background-color: yellow;">
+	</form>
+	<form method="POST" action="/users/{{ user.id }}/delete" style="display: inline; color: red;">
+		<input type="submit" value="Delete" style="background-color: red;">
+	</form>
+{% endblock %}
+{% block footer %}
+	{{ super() }}
+{% endblock %}

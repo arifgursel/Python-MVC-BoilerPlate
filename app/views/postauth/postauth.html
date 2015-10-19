@@ -1,0 +1,15 @@
+{% extends "./templates/_base.html" %}
+{% block title %}Post Auth{% endblock %}
+{% block head %} 
+	{{ super() }}
+{% endblock %}
+{% block header %}
+	{{ super() }}
+{% endblock %}
+{% block content %}
+    <h3>Hi {{ session['name']}}</h3>
+    <a href="/users"> See All Users </a>
+{% endblock %}
+{% block footer %}
+	{{ super() }}
+{% endblock %}
