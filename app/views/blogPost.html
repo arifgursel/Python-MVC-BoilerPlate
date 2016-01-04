@@ -1,0 +1,29 @@
+{% extends "_base.html" %}
+{% block title %}GBAM | News{% endblock title %}
+{% block head %}
+	{{ super() }}
+{% endblock head %}
+{% block nav %}
+	{{ super() }}
+{% endblock nav %}
+{% block content %}
+<header>
+    <h1 class="heading_mediumsize">.: {{blog.headline}} :.</h1>
+    <div class="center">
+    	<a href="/blog"><button class="button_main">Back To All Stories</button></a>
+    </div>   
+</header>
+<section class="section_light">
+	<div class="row">
+		<p>
+			{{blog.content}}
+		</p>
+	</div>
+</section>
+<section class="section_dark">
+	<p class="center">Written By: {{blog.user_id}} | Published: {{blog.created_at}}</p>
+</section>
+{% endblock content %}
+{% block footer %}
+	{{ super() }}
+{% endblock footer %}

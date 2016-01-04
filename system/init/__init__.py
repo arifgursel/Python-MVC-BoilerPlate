@@ -16,6 +16,7 @@ def initialize_app():
     instance_path = os.path.abspath(os.path.dirname(__file__) + '/../..')
     template_folder = os.path.join(instance_path, 'app/views')
     static_folder = os.path.join(instance_path, 'app/static')
+    upload_folder = os.path.join(instance_path, 'app/upload')
 
     app = Flask('app', static_folder=static_folder, template_folder=template_folder, instance_path=instance_path)
 

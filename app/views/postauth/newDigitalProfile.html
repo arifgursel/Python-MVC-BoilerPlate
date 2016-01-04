@@ -1,0 +1,38 @@
+{% extends "_base.html" %}
+{% block title %}GBAM: Artist Digital Info{% endblock %}
+{% block head %} 
+	{{ super() }}
+{% endblock %}
+{% block header %}
+	{{ super() }}
+{% endblock %}
+{% block content %}
+<header>
+  <h1 class="heading_mediumsize">.: Create Digital Profile :.</h1>
+</header>
+<section class="section_light section_last">
+	<div class="row">
+		<div class="three columns"></div>
+		<div class="six columns">
+			<form method="POST" action="/artists/profile/digital/{{artist_id}}">
+				Website: Enter Full URL
+				<input type='text' value='http://www.artist.com' name='website'>
+				Calendar: Enter Full URL
+				<input type='text' value='http://www.artist.com/calendar' name='calendar'>
+				Facebook: Enter Full URL
+				<input type='text' value='http://www.facebook.com/artistname' name='facebook'>
+				Twitter Handle: Don't include the "@"
+				<input type='text' value='twitterhandle' name='twitter'>
+				Instagram Handle: Don't include the "@"
+				<input type='text' value='instagramhandle' name='instagram'>
+				<button type="button" onclick="goBack()" class="button_cancel">Cancel</button>
+        		<button type="submit" class="button_create">Create</button>
+			</form>
+		</div>
+		<div class="three columns"></div>
+	</div>
+</section>
+{% endblock %}
+{% block footer %}
+	{{ super() }}
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "_base.html" %}
+{% block title %}GBAM | ROSTER{% endblock title %}
+{% block head %}
+	{{ super() }}
+{% endblock head %}
+{% block nav %}
+	{{ super() }}
+{% endblock nav %}
+{% block content %}
+<header>
+	<h6 class="heading_links">Admin Area Quick Links</h6>
+	<a href="/newArtist">
+		<h5 class="heading_smallsize">
+			<a href="/users">
+				<button type="button" class="button_main">Staff Management</button>
+			</a>
+			<a href="/blogs">
+				<button type="button" class="button_main">Blog/News Management</button>
+			</a>
+		</h5>
+	</a>
+</header>
+<section class="section_dark">
+	<h1 class="heading_mediumsize">.: Current Roster :.</h1>
+	<h3 class="heading_smallsize">
+		<a href="/artists/new"><button type="button" class="button_new">Add New Artist</button></a>
+	</h3>
+</section>
+<section class="section_light">
+	<div class="row">
+		<div class="two columns"></div>
+    	<div class="eight columns">
+			{% for artist in artists %}
+		    <!-- artist summary -->
+			<div class='box photo col3 center'>
+				{% if artist.has_profile == 1 and artist.has_digital == 1%}
+				<button type="submit" form="profile_{{artist.id}}" class="button_main">View Full Profile</button>
+        		{% endif %}
+        		{% if artist.has_profile == 0 %}
+				<button type="submit" form="detailed_profile_create_{{artist.id}}">Create Artist Profile</button>
+				{% endif %}
+        		{% if artist.has_digital == 0 %}
+				<button type="submit" form="digital_profile_create_{{artist.id}}">Create Digital Profile</button>
+				{% endif %}
+        		<hr>
+				<h2 class="heading_smallsize"><strong class="artistname">{{ artist.name }}</strong></h2></a>
+        		<hr>
+				<button type="submit" form="press_{{artist.id}}">Manage Artist Press</button>
+				<button type="submit" form="albums_{{artist.id}}">Manage Artist Albums</button>
+				<form method="get" 
+					  action="/artists/profile/detailed/{{artist.id}}" 
+					  id="detailed_profile_create_{{artist.id}}">
+				</form>
+				<form method="get" 
+					  action="/artists/profile/digital/{{artist.id}}" 
+					  id="digital_profile_create_{{artist.id}}">
+				</form>
+				<form method="get" action="/press/{{artist.id}}" id="press_{{artist.id}}"></form>
+				<form method="get" action="/discographies/{{artist.id}}" id="albums_{{artist.id}}"></form>
+				<form method="get" action="artists/profile/full/{{artist.id}}" id="profile_{{artist.id}}"></form>
+				<form method="post" action="artists/{{artist.id}}/edit" id="edit_{{artist.id}}"></form>
+				<form method="post" action="artists/{{artist.id}}/deactivate" id="deactivate_{{artist.id}}"></form>
+				<form method="post" action="artists/{{artist.id}}/activate" id="activate_{{artist.id}}"></form>
+				<form method="post" action="artists/{{artist.id}}/delete" id="delete_{{artist.id}}"></form>
+				<br>
+				{% if artist.active == 1 %}
+				<button type="submit" form="deactivate_{{artist.id}}" class="button_cancel">Deactivate</button>
+				{% else %}
+				<button type="submit" form="activate_{{artist.id}}" class="button_create">Activate</button>
+				<button type="submit" form="delete_{{artist.id}}" class="button_delete">Delete</button>
+				{% endif %}
+			</div>
+		    {% endfor %}
+		</div>
+		<div class="two columns"></div>
+	</div>
+</section>
+{% endblock content %}
+{% block footer %}
+	{{ super() }}
+{% endblock footer %}

@@ -1,0 +1,44 @@
+{% extends "_base.html" %}
+{% block title %}GBAM | Contact{% endblock title %}
+{% block head %}
+	{{ super() }}
+{% endblock head %}
+{% block nav %}
+	{{ super() }}
+{% endblock nav %}
+{% block content %}
+<header>
+    <h1 class="heading_mediumsize">We look forward to hearing from you...</h1>    
+</header>
+<section class="section_light section_last">
+	<div class="row contactarea">
+		<div class="six columns">
+			<h3>Gail Boyd Artist Management Team</h3>
+			<p><strong>Office Telephone:</strong> 212-777-5714 | <strong>Fax Line:</strong> 646-202-9285</p>
+			<!-- Users Table Info Will Go Here -->
+			{% for staff in staffMembers %}
+			<div>
+				<hr>
+				<h4>{{ staff.first_name }} {{ staff.last_name }}</h4>
+				<h5><strong>Email:</strong> {{ staff.email }}</h5>
+				<p><strong>Mobile:</strong> {{ staff.mobile }}</p>
+				<p><strong>Twitter:</strong> {{ staff.twitter }}</p>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="six columns">
+			<h3>Message Us Here</h3>
+			<form method="POST" action="/sendemail">
+				<label><strong>Name</strong></label>
+				<input type="text" placeholder="Your Name" name="name"/>
+				<input type="text" placeholder="Your Email Adress" name="sender" />
+				<textarea placeholder="Your Message" name="message"></textarea>
+				<input type="submit" value="Send Message" class="button_main"/>
+			</form>
+		</div>
+	</div>
+</section>
+{% endblock content %}
+{% block footer %}
+	{{ super() }}
+{% endblock footer %}

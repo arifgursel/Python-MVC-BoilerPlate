@@ -1,0 +1,44 @@
+{% extends "_base.html" %}
+{% block title %}GBAM: New Artist Info Page{% endblock %}
+{% block head %} 
+	{{ super() }}
+{% endblock %}
+{% block header %}
+	{{ super() }}
+{% endblock %}
+{% block content %}
+<header>
+  <h1 class="heading_mediumsize">.: Create Artist Profile :.</h1>
+</header>
+<section class="section_light section_last">
+  <div class="row">
+    <div class="three columns"></div>
+    <div class="six columns">
+    	<form method="POST" action="/artists/profile/detailed/{{artist_id}}">
+    		Composer:   <select name="composer">
+        					<option value="0">No</option>
+        					<option value="1" selected>Yes</option>
+      					</select>
+    		Arranger:	<select name="arranger">
+        					<option value="0">No</option>
+        					<option value="1" selected>Yes</option>
+      					</select>
+    		Clinic:		<select name="clinic">
+        					<option value="0">No</option>
+        					<option value="1" selected>Yes</option>
+      					</select>
+    		Residency:	<select name="residency">
+        					<option value="0">No</option>
+        					<option value="1" selected>Yes</option>
+      					</select>
+    		<button type="button" onclick="goBack()" class="button_cancel">Cancel</button>
+        <button type="submit" class="button_create">Create</button>
+    	</form>
+    </div>
+    <div class="three columns"></div>
+  </div>
+</section>
+{% endblock %}
+{% block footer %}
+	{{ super() }}
+{% endblock %}

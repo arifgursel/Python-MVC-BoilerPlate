@@ -1,0 +1,52 @@
+{% extends "_base.html" %}
+{% block title %}GBAM | News{% endblock title %}
+{% block head %}
+	{{ super() }}
+{% endblock head %}
+{% block nav %}
+	{{ super() }}
+{% endblock nav %}
+{% block content %}
+<header>
+	<h1 class="heading_mediumsize">.: Update Press Post :.</h1>    
+	<a href="/newArtist">
+		<h5 class="heading_smallsize">
+			<a href="/press/{{ artist_id }}">
+					<button type="button">Back To All Press</button>
+				</a>
+			<a href="/users">
+				<button type="button">Staff Management</button>
+			</a>
+			<a href="/artists">
+				<button type="button">Roster Management</button>
+			</a>
+		</h5>
+	</a>
+</header>
+<section class="section_light">
+	<div class="row">
+		<div class="two columns"></div>
+    	<div class="eight columns">
+			<form method="post" action="/press/{{artist_id}}/{{id}}/edit" id="editPress">
+			Headline:
+			<input type="text" name="headline" value="{{ press.headline }}">
+			Intro:
+			<textarea name="intro">{{ press.intro }}</textarea>
+			Content: 
+			<textarea name="content">{{ press.content }}</textarea>
+			Author:
+			<input type="text" name="writer" value="{{ press.writer }}">
+			Publisher:
+			<input type="text" name="publisher" value="{{ press.publisher }}">
+			URL:
+			<input type="url" name="url" value="{{ press.url }}">
+			</form>
+			<button type="submit" onclick="goBack()" class="button_cancel">Cancel</button>
+			<button type="submit" class="button_update" form="editPress">Update</button>
+		<div class="two columns"></div>
+	</div>
+</section>
+{% endblock content %}
+{% block footer %}
+	{{ super() }}
+{% endblock footer %}

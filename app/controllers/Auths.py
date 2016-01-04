@@ -23,18 +23,21 @@ class Auths(Controller):
             
     def process_log(self):
         login_info = {'email': request.form['email'],
-                    'password': request.form['password']
-                    }
+                      'password': request.form['password']}
         login_status = self.models['Auth'].process_log(login_info)
         if login_status['status'] == True:
+            session['loggedIn'] = True 
             session['id'] = login_status['user']['id'] 
-            session['name'] = login_status['user']['name']
-            session['alias'] = login_status['user']['alias']
-            session['content'] = ''
-            return redirect('/rbr')
+            session['first_name'] = login_status['user']['first_name']
+            session['last_name'] = login_status['user']['last_name']
+            session['type'] = login_status['user']['type']
+            if session['type'] > 1:
+                return redirect('/dashboard')
+            else:
+                return redirect('/blog')
         else:
             for error in login_status['errors']:
                 flash(error)
-            return redirect('/')
+            return redirect('/login')
 
 

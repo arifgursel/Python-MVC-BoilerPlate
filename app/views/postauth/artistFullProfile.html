@@ -1,0 +1,54 @@
+{% extends "_base.html" %}
+{% block title %}GBAM: Full Artist Profile{% endblock %}
+{% block head %} 
+	{{ super() }}
+{% endblock %}
+{% block header %}
+	{{ super() }}
+{% endblock %}
+{% block content %}
+<header>
+  <h1 class="heading_mediumsize">.: {{artist.name}} Artist Profile :.</h1>
+  <div class="center">
+    <a href="/artists">
+      <button type="submit" class="button_main">Back To Roster</button>
+    </a>
+    </div>
+</header>
+<section class="section_light section_last">
+  <div class="row">
+    <div class="three columns"></div>
+    <div class="six columns">
+      <h3>.: Basic Information :.</h3>
+      <p><strong>ID:</strong> {{artist.id}}</p>
+      <p><strong>Name:</strong> {{artist.name}}</p>
+  		<p><strong>Instrument:</strong> {{artist.instrument}}</p>
+      <p><strong>Bio:</strong> {{artist.bio}}</p>
+      <a href="/artists/{{artist.id}}">
+        <button type="submit" class="button_main">Update Basic Profile</button>
+      </a>
+      <h5>.: Details :.</h5>
+      <p><strong>Composer: </strong> {% if artist.composer == 1 %} Yes</p> {% else %} No</p> {% endif %}
+    	<p><strong>Arranger: </strong> {% if artist.arranger == 1 %} Yes</p> {% else %} No</p> {% endif %}
+    	<p><strong>Clinic: </strong> {% if artist.clinic == 1 %} Yes</p> {% else %} No</p> {% endif %}
+    	<p><strong>Residency: </strong> {% if artist.residency == 1 %} Yes</p> {% else %} No</p> {% endif %}
+      <a href="/artists/profile/detailed/{{artist.id}}/edit">
+        <button type="submit" class="button_main">Update Detailed Profile</button>
+      </a>
+      <h5>.: Digital Profile :.</h5>
+      <p><strong>Website: </strong>{{artist.website}}</p>
+      <p><strong>Calendar: </strong>{{artist.calendar}}</p>
+      <p><strong>Facebook: </strong>{{artist.facebook}}</p>
+      <p><strong>Twitter Handle: </strong>@{{artist.twitter}}</p>
+      <p><strong>Instagram Handle: </strong>@{{artist.instagram}}</p>
+      <a href="/artists/profile/digital/{{artist.id}}/edit">
+        <button type="submit" class="button_main">Update Digital Profile</button>
+      </a>
+    </div>
+    <div class="three columns"></div>
+  </div>
+</section>
+{% endblock %}
+{% block footer %}
+	{{ super() }}
+{% endblock %}

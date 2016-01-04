@@ -1,0 +1,49 @@
+{% extends "_base.html" %}
+{% block title %}GBAM | Artist Press{% endblock title %}
+{% block head %}
+	{{ super() }}
+{% endblock head %}
+{% block nav %}
+	{{ super() }}
+{% endblock nav %}
+{% block content %}
+<header>
+	<h6 class="heading_links">Admin Area Quick Links</h6>
+	<h5 class="heading_smallsize">
+		<a href="/users">
+			<button type="button" class="button_main">Staff Management</button>
+		</a>
+		<a href="/artists">
+			<button type="button" class="button_main">Roster Management</button>
+		</a>
+		<a href="/instructions">
+			<button type="button" class="button_main">Instructions</button>
+		</a>
+	</h5>
+</header>
+<section class="section_dark">
+    <h1 class="heading_mediumsize">.: Press Maintenance :.</h1>    
+	<h3 class="heading_smallsize">
+		<a href="/press/new/{{ artist_id }}"><button type="button" class="button_new">Add New Press</button></a>
+	</h3>
+</section>
+<section class="section_light section_last">
+	<div class="row">
+		<div id="container">
+			{% for press in pressList %}
+			<div class='box col3'>
+				<h1>{{ press.headline }}</h1>
+				<p>{{ press.quote }}</p>
+				<form method="GET" action="/press/{{ artist_id }}/{{press.id}}" id="get_{{press.id}}"></form>
+				<form method="POST" action="/press/{{artist_id}}/{{press.id}}/delete" id="delete_{{press.id}}"></form>
+				<button type="submit" form="get_{{press.id}}" class="button_update">Update</button>   
+				<button type="submit" form="delete_{{press.id}}" class="button_delete">Delete</button>   
+			</div>
+		    {% endfor %}
+		 </div>
+	</div>
+</section>
+{% endblock content %}
+{% block footer %}
+	{{ super() }}
+{% endblock footer %}

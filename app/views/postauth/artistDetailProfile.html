@@ -1,0 +1,64 @@
+{% extends "_base.html" %}
+{% block title %}GBAM: Full Artist Profile{% endblock %}
+{% block head %} 
+	{{ super() }}
+{% endblock %}
+{% block header %}
+	{{ super() }}
+{% endblock %}
+{% block content %}
+<header>
+  <h1 class="heading_mediumsize">.: {{artist.name}} Details :.</h1>
+</header>
+<section class="section_light section_last">
+  <div class="row">
+    <div class="three columns"></div>
+    <div class="six columns">
+      <form method="POST" action="/artists/profile/detailed/{{artist_id}}/edit">
+      Composer:   <select name="composer">
+                {% if artist.composer == 1%}
+                <option value="0">No</option>
+                <option value="1" selected>Yes</option>
+                {% else %}
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+                {% endif %}
+              </select>
+      Arranger: <select name="arranger">
+                {% if artist.arranger == 1%}
+                <option value="0">No</option>
+                <option value="1" selected>Yes</option>
+                {% else %}
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+                {% endif %}
+              </select>
+      Clinic:   <select name="clinic">
+                {% if artist.clinic == 1%}
+                <option value="0">No</option>
+                <option value="1" selected>Yes</option>
+                {% else %}
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+                {% endif %}
+              </select>
+      Residency:  <select name="residency">
+                {% if artist.residency == 1%}
+                <option value="0">No</option>
+                <option value="1" selected>Yes</option>
+                {% else %}
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+                {% endif %}
+              </select>
+      <button type="button" onclick="goBack()" class="button_cancel">Cancel</button>
+      <button type="submit" class="button_update">Update</button>
+    </form>
+    </div>
+    <div class="three columns"></div>
+  </div>
+</section>
+{% endblock %}
+{% block footer %}
+	{{ super() }}
+{% endblock %}

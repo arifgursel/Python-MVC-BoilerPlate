@@ -1,65 +1,72 @@
-<html>
-  <head>
-	<title></title>
-	<script src"{{url_for('static', filename='js/main.js')}}"></script>
-	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/styles.css')}}">
-  </head>
-  <body>
-	<div id="container">
-	  <div id="header"> 
-		<div class="block" id="logo"><img src="{{url_for('static', filename='img/logo_white.png')}}"></div>  
-		<div class="block"></div>  
-		<div class="block" id="mark"><span>Please Login or Register</span>
-		</div>  
-	  </div>
-	  <div class="preauth_content">
-		<div id="register" class="">
-		  <form action='/processreg' method='POST'>
-			<h1>Registration</h1>
-			{% with messages = get_flashed_messages() %}
-			  {% if messages %}
-				{% for message in messages %}
-				  <p class='flasherror'>{{message}}</p>
-				{% endfor %}
-			  {% endif %}
-			{% endwith %}
-			<div class="labels">
-			  <p>Name:</p>
-			  <p>Alias:</p>
-			  <p>Email:</p>
-			  <p>Password:</p>
-			  <p>Confirm pw:</p>
-			</div>
-			<div class="inputs">
-			  <input type='text' name='name'>
-			  <input type='text' name='alias'>
-			  <input type='email' name='email'>
-			  <input type='password' name='password1'>
-			  <input type='password' name='password2'>
-			</div>
-			<input type='submit' value="Register">
-		  </form>
+{% extends "_base.html" %}
+{% block title %}GBAM{% endblock title %}
+{% block head %}
+	{{ super() }}
+{% endblock head %}
+{% block nav %}
+	{{ super() }}
+{% endblock nav %}
+{% block content %}
+<header>
+	<h1 class="heading_supersize goWhite">GAIL BOYD</h1>
+	<h4 class="heading_largesize goWhite"><span class="borderupdown">ARTIST MANAGEMENT</span></h4>
+	<div class="six centered column marquee">
+		<img class="" src="{{url_for('static', filename='img/ESJR.png')}}"/>
+	</div>  
+</header>
+<section class="section_dark">
+	<div class="row">
+		 <div class="twelve columns">
+			<blockquote>
+				<p class="goWhite">
+					"It is the mission of Gail Boyd Artist Management to perpetuate jazz as an art form by supporting the artists who create this beautiful music."
+				</p>
+				<cite class="goWhite">Gail Boyd | Gail Boyd Artist Management</cite>                    
+			</blockquote> 
+		 </div>    
+	 </div>
+</section>
+<section class="section_light">
+	<div class="row">
+		<div class="four columns">
+			<h3><span class="dropcap_red lsf-icon-dropcap" title="camera"></span>Our Roster</h3>
+			<hr>
+			<p>
+				Please note that these artists are composers and educators. Thus, in addition to stellar performances, they are available for commissions, residencies, master classes, clinics, and lectures.
+			</p>
+			<hr>
+			<p>
+				Take a moment and click on to the roster to get more details about each artist. The news section will keep you abreast of any late breaking stories. Each artist has a link to his or her personal website. 
+			</p>
+		</div>    
+		<div class="four columns">
+			<h3><span class="dropcap_black lsf-icon-dropcap" title="cloud"></span>Latest News</h3>
+			{% for story in news %}
+			<hr>
+		    <h5 class="center">{{ story.headline }}</h5>
+		    <p>{{ story.intro }} <a href="/blog/{{story.id}}">...[read more]</a></p>
+		    {% endfor %}
 		</div>
-		<div id="login">
-		  <form action='/processlog' method='POST'>
-			<h1>Login</h1>
-			<div class="labels">
-			  <p>Email:</p>
-			  <p>Password:</p>
-			</div>
-			<div class="inputs">
-			  <input type='email' name='email'>
-			  <input type='password' name='password'>
-			</div>
-			<input type='submit' value="Login">
-		  </form>
-		</div> 
-	  </div>
-	  <div id="footer">
-		<div class="block" id="logo-footer"><img src="{{url_for('static', filename='img/logo_white.png')}}"></div>  
-		<div class="block"><p>Project Name</p></div>  
-		<div class="block" id="devby"><img src="{{url_for('static', filename='img/logo_footer_grey.png')}}"></div>     
-	  </div>
+		<div class="four columns">
+			<h3><span class="dropcap_black lsf-icon-dropcap" title="video"></span>Join Our Email List</h3>
+			<hr>
+            <form method="post" action="http://ymlp.com/subscribe.php?YMLPID=gumwqmygmgs" target="_blank">
+	            <table border="0" align="center" cellspacing="0" cellpadding="5" style="width: 100%">
+	            	<tr>
+	            		<td colspan="2">Enter your e-mail address to receive our newsletter!</td>
+	            	</tr>
+	            	<tr><td valign="top">E-mail:</td>
+	            		<td valign="top"><input type="text" name="YMP0" size="20" /></td>
+	            	</tr>
+	            	<tr>
+	            		<td colspan="2"><input type="submit" /></td>
+	            	</tr>
+	            </table>
+            </form>
+		</div>
 	</div>
-  </body>
-</html>
+</section>
+{% endblock content %}
+{% block footer %}
+	{{ super() }}
+{% endblock footer %}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    {% block head %}
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <!-- Included CSS Files (Compressed) -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/foundation.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/app.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/ligature.css')}}">
+    <!-- Google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Playfair+Display:400italic' rel='stylesheet' type='text/css' />
+    <!-- JS Files -->
+    <script src="{{url_for('static', filename='js/modernizr.foundation.js')}}"></script>
+    {% endblock %}
+  </head>
+  <body> 
+      {% block nav %}
+      <nav>
+        <div class="row header_nav">
+          <img class="logo" src="{{url_for('static', filename='img/logo.png')}}" />
+          <ul id="menu-header" class="nav-bar horizontal clearfix">
+            <li class="" style="margin-right:10em;"></li>
+            <li class="active right"><a href="/home">Home</a></li>
+            <li class=""> <a href="/about">About</a></li>
+            <li class=""><a href="/services">Services</a></li>
+            <li class=""><a href="/roster">Roster</a></li>
+            <li class=""><a href="/blog">News</a></li>
+            <li class=""><a href="/contact">Contact</a></li>
+            {% if session['type'] == 1 %}
+            <li class=""><a href="/dashboard">Admin Area</a></li>
+            {% endif %}
+            {% if session['loggedIn'] == True %}
+            <li class=""><a href="/logout"><button type="submit" class="button_main">Logout</button></a></li>
+            {% endif %}
+            {% if session['loggedIn'] != True %}
+            <li class=""><a href="/login"><button type="submit" class="button_main">Login</button></a></li>
+            {% endif %}
+          </ul>     
+          
+          <script type="text/javascript">
+           //<![CDATA[
+           $('ul#menu-header').nav-bar();
+            //]]>
+          </script>
+        </div>  
+      </nav>
+      {% endblock %}
+      <div class="content_container">
+      {% block content %}
+
+      {% endblock %}
+      </div>
+      {% block footer %}
+      <div class="section_footer">
+        <div class="row">
+            <div class="four columns" style="text-align:left;">
+               <p>Gail Boyd Artist Management</p>
+            </div>
+            <div class="four columns center" >
+                <p class="slogan"><strong>EAT. SLEEP. JAZZ. REPEAT!</strong></p>
+            </div>
+            <div class="four columns" style="text-align:right;">
+                <p>Developed by <a href="www.vibeheavy.com">VIBEHEAVY</a></p>
+            </div>
+        </div>
+      </div>
+      <!-- Included JS Files (Compressed) -->
+      <script src="{{url_for('static', filename='js/foundation.min.js')}}"></script> 
+      <!-- Initialize JS Plugins -->
+      <script src="{{url_for('static', filename='js/app.js')}}"></script>
+      <!-- VIBEHEAVY custom JS -->
+      <script src="{{url_for('static', filename='js/main.js')}}"></script>  
+      {% endblock %}   
+  </body>
+</html>

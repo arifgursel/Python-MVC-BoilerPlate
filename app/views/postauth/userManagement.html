@@ -1,0 +1,58 @@
+{% extends "_base.html" %}
+{% block title %}Users: Info Page{% endblock %}
+{% block head %} 
+	{{ super() }}
+{% endblock %}
+{% block header %}
+	{{ super() }}
+{% endblock %}
+{% block content %}
+<header>
+	<h6 class="heading_links">Admin Area Quick Links</h6>
+	<h5 class="heading_smallsize">
+		<a href="/artists">
+			<button type="button" class="button_main">Roster Management</button>
+		</a>
+		<a href="/blogs">
+			<button type="button" class="button_main">Blog Management</button>
+		</a>
+	</h5>
+</header>
+<section class="section_dark">
+	<h1 class="heading_mediumsize">.: Current Staff :.</h1>
+	<a href="/users/new">
+		<h3 class="heading_smallsize">
+			<button type="button" class="button_new">Add New Staff</button>
+		</h3>
+	</a>
+</section>
+<section class="section_light">
+	<div class="row">
+		<div class="two columns"></div>
+    	<div class="eight columns">
+		{% for user in users %}
+			 <!-- staff summary -->
+			<div class='box photo col3'>
+				<h2 class="heading_smallsize">
+					<strong class="artistname">{{ user.first_name }} {{ user.last_name }}</strong>
+				</h2>
+				<div class="center">
+					<p>ID: {{ user.id }}</p>
+					<p>Email: {{ user.email }}</p> 
+					<p>Mobile#: {{ user.mobile }}</p> 
+					<p>Twitter: {{ user.twitter }}</p>
+					{% if user.type == 0 %}
+					<a href="/users/{{ user.id }}/admin"><button type="submit" class="button_create">Make Admin</button></a>
+					{% endif %}
+					<a href="/users/{{ user.id }}"><button type="submit" class="button_update">Update</button></a>
+				</div>
+			</div> 
+		{% endfor %}
+		</div>
+		<div class="two columns"></div>
+	</div>
+</section>
+{% endblock %}
+{% block footer %}
+	{{ super() }}
+{% endblock %}

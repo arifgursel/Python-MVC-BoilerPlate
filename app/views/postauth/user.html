@@ -1,5 +1,5 @@
-{% extends "./templates/_base.html" %}
-{% block title %}User: Info Page{% endblock %}
+{% extends "_base.html" %}
+{% block title %}Staff: Info Page{% endblock %}
 {% block head %} 
 	{{ super() }}
 {% endblock %}
@@ -7,18 +7,42 @@
 	{{ super() }}
 {% endblock %}
 {% block content %}
-	<form method="POST" action="/users/{{ user.id }}/edit" style="display: inline;">
-		Name: <input type='text' value='{{ user.name }}' name='name'>
-		Alias: <input type='text' value='{{ user.alias }}' name='alias'> 
-		Email: <input type='text' value='{{ user.email }}' name='email'> 
-		<p>User_ID: {{ user.id }}</p>
-		<p>Created: {{ user.created_at }}</p>
-		<p>Updated: {{ user.updated_at }}</p>
-		<input type="submit" value="Update" style="background-color: yellow;">
-	</form>
-	<form method="POST" action="/users/{{ user.id }}/delete" style="display: inline; color: red;">
-		<input type="submit" value="Delete" style="background-color: red;">
-	</form>
+<header>
+	<h1 class="heading_mediumsize">.: Update Staff Information :.</h1>
+	<h5 class="heading_smallsize">
+		<a href="/users">
+			<button type="button">Back To All Staff</button>
+		</a>
+		<a href="/artists">
+			<button type="button">Roster Management</button>
+		</a>
+		<a href="/blogs">
+			<button type="button">Blog/News Management</button>
+		</a>
+	</h5>
+</header>
+<section class="section_light">
+	<div class="row">
+		<div class="three columns"></div>
+		<div class="six columns">
+			<h3 class="heading_smallsize">Edit Staff Information</h3>
+			<p class="center">Created: {{ user.created_at }} | Updated: {{ user.updated_at }}</p>
+			<form method="POST" action="/users/{{ user.id }}/edit" id="update">
+				First Name: <input type='text' value='{{ user.first_name }}' name='first_name'>
+				Last Name: <input type='text' value='{{ user.last_name }}' name='last_name'> 
+				Email: <input type='text' value='{{ user.email }}' name='email'>
+				Mobile: <input type='text' value='{{ user.mobile }}' name='mobile'>
+				Twitter: <input type='text' value='{{ user.twitter }}' name='twitter'> 
+			</form>
+			<form method="POST" action="/users/{{ user.id }}/delete" id="delete"></form>
+			<div class="center">
+				<button type="submit" onclick="goBack()" class="button_cancel">Cancel</button>
+				<button type="submit" form="update" class="button_update">Update</button>
+				<button type="submit" form="delete" class="button_delete">Delete</button>
+			</div>
+		<div class="three columns"></div>
+	</div>
+</section>
 {% endblock %}
 {% block footer %}
 	{{ super() }}

@@ -1,0 +1,33 @@
+{% extends "_base.html" %}
+{% block title %}GBAM | News{% endblock title %}
+{% block head %}
+	{{ super() }}
+{% endblock head %}
+{% block nav %}
+	{{ super() }}
+{% endblock nav %}
+{% block content %}
+<header>
+    <h1 class="heading_mediumsize">GBAM News Feed</h1>   
+</header>
+<section class="section_light">
+	<div class="row">
+		<div class="two columns"></div>
+    	<div class="eight columns">
+			{% for blog in blogs %}
+			<article class="">
+				<div class="four columns box">
+					<h3>{{blog.headline}}</h3>
+					<p class="excerpt">{{blog.intro}}</p>
+					<p><a href="/blog/{{blog.id}}"><button class="button_main">Read Full Story</button></a></p>    
+				</div>
+		    </article>
+		    {% endfor %}
+		</div>
+		<div class="two columns"></div>
+	</div>
+</section>
+{% endblock content %}
+{% block footer %}
+	{{ super() }}
+{% endblock footer %}

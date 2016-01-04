@@ -17,7 +17,7 @@ class User(Model):
     #Read (*)
     def index(self):
         #get all users currently registered in the DB
-        query = "SELECT * FROM users;";
+        query = "SELECT * FROM users WHERE type < 4 ORDER BY type DESC;"
         return self.db.query_db(query);
     #Read (1)
     def get_user(self, id):
@@ -27,12 +27,12 @@ class User(Model):
     #Create   
     def create_user(self, user_info):
         #get a single user by ID
-        query = "INSERT INTO users (`name`, `alias`, `email`, `pw_hash`, `created_at`, `updated_at`) VALUES ('{}', '{}', '{}', '{}', NOW(), NOW())".format(user_info['name'], user_info['alias'], user_info['email'], user_info['pw_hash']);
+        query = "INSERT INTO users (`first_name`, `last_name`, `email`, `pw_hash`, `created_at`, `updated_at`) VALUES ('{}', '{}', '{}', '{}', NOW(), NOW())".format(user_info['first_name'], user_info['last_name'], user_info['email'], user_info['pw_hash']);
         return self.db.query_db(query);
     #Update
     def update_user(self, user_info):
         #update a single user by passing JSON of user information
-        query = "UPDATE users SET `name`='{}', `alias`='{}', `email`='{}', `updated_at`=NOW() WHERE `id`='{}';".format(user_info['name'], user_info['alias'], user_info['email'], user_info['id']);
+        query = "UPDATE users SET `first_name`='{}', `last_name`='{}', `email`='{}', `mobile`='{}', `twitter`='{}', `updated_at`=NOW() WHERE `id`='{}';".format(user_info['first_name'], user_info['last_name'], user_info['email'], user_info['mobile'], user_info['twitter'], user_info['id']);
         return self.db.query_db(query);
     #Delete
     def delete_user(self, id):
@@ -51,24 +51,24 @@ class User(Model):
         EMAIL_REGEX = re.compile(r'^[a-za-z0-9\.\+_-]+@[a-za-z0-9\._-]+\.[a-za-z]*$')
         errors = []
         # some basic validations
-        if not user_info['name']:
-            errors.append('Name cannot be blank')
-        elif len(user_info['name']) < 2:
-            errors.append('Name must be at least 2 characters long')
-        if not user_info['alias']:
-            errors.append('Alias cannot be blank')
-        elif len(user_info['alias']) < 2:
-            errors.append('Alias must be at least 2 characters long')
+        if not user_info['first_name']:
+            errors.append('First name cannot be blank')
+        elif len(user_info['first_name']) < 2:
+            errors.append('First name must be at least 2 characters long')
+        if not user_info['last_name']:
+            errors.append('Last name cannot be blank')
+        elif len(user_info['last_name']) < 2:
+            errors.append('Last name must be at least 2 characters long')
         if not user_info['email']:
             errors.append('Email cannot be blank')
         elif not EMAIL_REGEX.match(user_info['email']):
-            errors.append('Email format must be valid!')
+            errors.append('Enter valid email address')
         if not user_info['password1']:
             errors.append('Password cannot be blank')
         elif len(user_info['password1']) < 8:
             errors.append('Password must be at least 8 characters long')
         elif user_info['password1'] != user_info['password2']:
-            errors.append('Password and confirmation must match!')
+            errors.append('Passwords must match!')
         # check if there are any errors, if there are any return the array
         # otherwise return True
         if errors:
@@ -84,5 +84,10 @@ class User(Model):
             # retrieve the last inserted user from above so you can return and save session info
             user = self.get_latest_user()
             return {"status": True, "user": user[0]} #always returns a list so we retrieve the first and hopefully only element
-
+    #Make Admin
+    def make_admin(self, id):
+        print "ID: ", id
+        query = "UPDATE users SET `type`= 1, `updated_at`= NOW() WHERE `id`={};".format(id);
+        print "Query: ", query
+        return self.db.query_db(query);
     
